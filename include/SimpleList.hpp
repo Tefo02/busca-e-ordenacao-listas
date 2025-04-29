@@ -5,16 +5,16 @@
 #include <random>
 
 
-// Definição da estrutura do Nó Simples.
-struct SimpleNode {
-    int data;
-    SimpleNode* next;
-};
-
-
 
 class SimpleList {
-public:
+    public:
+
+    // Definição da estrutura do Nó Simples.
+    struct SimpleNode {
+        int data;
+        SimpleNode* next;
+    };
+
     // Construtores e Destrutores.
     SimpleList();
     ~SimpleList();

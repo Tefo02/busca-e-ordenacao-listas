@@ -4,21 +4,18 @@
 #include <iostream>
 #include <random>
 
-
-// Definição da estrutura do Nó Simples.
-struct DoubleNode {
-    int data;
-    DoubleNode* next;
-    DoubleNode* previous;
-};
-
-
-
 class DoubleList {
-public:
+    public:
     // Construtores e Destrutores.
     DoubleList();
     ~DoubleList();
+    
+    // Definição da estrutura do Nó Simples.
+    struct DoubleNode {
+        int data;
+        DoubleNode* next;
+        DoubleNode* previous;
+    };
 
     // Métodos Públicos da Classe.
 

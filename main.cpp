@@ -6,10 +6,8 @@
 
 int main(){
 
-    std::cout << "Ola, Robert.\n";
+    std::cout << "Ola, Mundo.\n";
     std::cin.get();
-
-    std::cout << "Grande Este Éfano.\n";
 
     return 0;
 }
