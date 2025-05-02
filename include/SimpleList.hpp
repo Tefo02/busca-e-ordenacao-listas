@@ -4,20 +4,18 @@
 #include <iostream>
 #include <random>
 
-
-
 class SimpleList {
     public:
 
+    // Construtores e Destrutores.
+    SimpleList();
+    ~SimpleList();
+    
     // Definição da estrutura do Nó Simples.
     struct SimpleNode {
         int data;
         SimpleNode* next;
     };
-
-    // Construtores e Destrutores.
-    SimpleList();
-    ~SimpleList();
 
     // Métodos Públicos da Classe.
 

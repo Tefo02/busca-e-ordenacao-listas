@@ -18,15 +18,20 @@ class DoubleList {
     };
 
     // Métodos Públicos da Classe.
-
-    // TODO.
-    
+    void getList(size_t size);
+    void getRandomList(size_t size, int minimumValue, int maximumValue);
+    bool insertAt(int value, DoubleNode* previous);
+    bool swapValue(DoubleNode* nodeA, DoubleNode* nodeB);
+    DoubleNode* search(int value, unsigned& numberOfAccess);
+    DoubleNode* findMinimum(unsigned& numberOfAccess);
+    void displayList();
+    void displayReversedList();
 
 private:
     // Define o Nó Cabeça.
     DoubleNode* head;
-
     // Métodos Privados da Classe.
-
-    // TODO.
+    
+    void printfReversedOrder();
+    void clean();
 };
