@@ -12,15 +12,22 @@ public:
 
     // Métodos Públicos da Classe.
 
-    // TODO.
+    void getList(size_t size);
+    void getRandomList(int minimumValue, int maximumValue);
+    bool insertAt(int value, int position);
+    bool swapValue(int firstPosition, int secondPosition);
+    int search(int value, unsigned& numberOfAccess);
+    int findMinimum(unsigned& numberOfAccess, int& minimum);
+    void displayList();
+    void displayReversedList();
 
 private:
     // Definição da estrutura.
     int *array = nullptr;
-    size_t capacity = 10;
+    size_t capacity = 8;
     size_t size = 0;
 
     // Métodos Privados da Classe.
-
+    void clean();
     // TODO.
 };

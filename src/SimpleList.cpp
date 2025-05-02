@@ -31,12 +31,12 @@ void SimpleList::getList(size_t size)
         current = current->next;
     }
 }
-void SimpleList::getRandomList(size_t size, int minimiumValue, int maximiumValue)
+void SimpleList::getRandomList(size_t size, int minimumValue, int maximumValue)
 {   
     clean();
     std::random_device rd;
 	std::mt19937 gen(rd());
-	std::uniform_int_distribution<> distrib(minimiumValue, maximiumValue);
+	std::uniform_int_distribution<> distrib(minimumValue, maximumValue);
 
     SimpleNode* current = head;
 	for(size_t index = 0; index < size; ++index) {

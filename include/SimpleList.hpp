@@ -18,7 +18,7 @@ class SimpleList {
     };
 
     void getList(size_t size);
-    void getRandomList(size_t size, int minimiumValue, int maximiumValue);
+    void getRandomList(size_t size, int minimumValue, int maximumValue);
     void insertAt(int value, SimpleNode* previous);
     bool swapValue(SimpleNode* nodeA, SimpleNode* nodeB);
     SimpleNode* search(int value, unsigned& numberOfAccess);
