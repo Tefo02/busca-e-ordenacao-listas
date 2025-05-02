@@ -17,16 +17,24 @@ class SimpleList {
         SimpleNode* next;
     };
 
+    void getList(size_t size);
+    void getRandomList(size_t size, int minimiumValue, int maximiumValue);
+    void insertAt(int value, SimpleNode* previous);
+    bool swapValue(SimpleNode* nodeA, SimpleNode* nodeB);
+    SimpleNode* search(int value, unsigned& numberOfAccess);
+    SimpleNode* findMinimum(unsigned& numberOfAccess, int& lowest_value);
+    void displayList();
+    void displayReversedList();
+
     // Métodos Públicos da Classe.
 
-    // TODO.
-    
 
 private:
     // Define o Nó Cabeça.
     SimpleNode* head;
 
     // Métodos Privados da Classe.
-
-    // TODO.
+    SimpleNode* newNode(int value);
+    void printfReverseOrder(SimpleNode* node);
+    void clean();
 };
