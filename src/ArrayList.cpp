@@ -87,16 +87,19 @@ int ArrayList::search(int value, unsigned& numberOfAccess)
 int ArrayList::findMinimum(unsigned& numberOfAccess, int& minimum)
 {
     minimum = INT32_MAX;
-
+    int minimumIndex = -1;
     for(int index = 0; index < size; index++)
     {
         if(minimum > array[index])
         {
+            minimumIndex = index;
             minimum = array[index];
             numberOfAccess++;
         }
         numberOfAccess++;
     }
+
+    return minimumIndex;
 }
 void ArrayList::displayList()
 {
