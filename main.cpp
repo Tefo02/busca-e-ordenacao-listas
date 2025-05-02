@@ -26,9 +26,9 @@ enum class Option {
 enum ListType menu();
 enum Option submenu(enum ListType listType);
 void listOperations(enum ListType listType);
-void arrayOperations(enum Option option);
-void simpleListOperations(enum Option option);
-void doubleListOperations(enum Option option);
+void arrayOperations(enum Option option, ArrayList& array);
+void simpleListOperations(enum Option option, SimpleList& simpleList);
+void doubleListOperations(enum Option option, DoubleList& doubleList);
 
 int getInt(std::string message);
 unsigned getUnsigned(std::string message);
@@ -44,6 +44,7 @@ int main(){
         listOperations(listType);
     }
     
+    std::cout << "fim do programa.\n";
     return 0;
 }
 
@@ -118,17 +119,17 @@ Option submenu(enum ListType listType){
     int opc;
     while (true) {
         std::cout << "\n\t+--------------+ Submenu +--------------+\n";
-        std::cout << "\t| - Operacoes:                          |";
-        std::cout << "\t|      1. Ler Lista                     |";
-        std::cout << "\t|      2. Gerar Lista Aleatoria         |";
-        std::cout << "\t|      3. Inserir valor                 |";
-        std::cout << "\t|      4. Fazer trasnposicao de Valores |";
-        std::cout << "\t|      5. Procurar um valor             |";
-        std::cout << "\t|      6. Procurar o menor valor        |";
-        std::cout << "\t|      7. Mostrar Lista                 |";
-        std::cout << "\t|      8. Mostrar em ordem inversa      |";
-        std::cout << "\t|      0. Voltar para o menu            |";
-        std::cout << "\t+---------------------------------------+";
+        std::cout << "\t| - Operacoes:                          |\n";
+        std::cout << "\t|      1. Ler Lista                     |\n";
+        std::cout << "\t|      2. Gerar Lista Aleatoria         |\n";
+        std::cout << "\t|      3. Inserir valor                 |\n";
+        std::cout << "\t|      4. Fazer transposicao de Valores |\n";
+        std::cout << "\t|      5. Procurar um valor             |\n";
+        std::cout << "\t|      6. Procurar o menor valor        |\n";
+        std::cout << "\t|      7. Mostrar Lista                 |\n";
+        std::cout << "\t|      8. Mostrar em ordem inversa      |\n";
+        std::cout << "\t|      0. Voltar para o menu            |\n";
+        std::cout << "\t+---------------------------------------+\n";
 
         opc = getInt("Digite a opcao desejada: ");
         if (opc >= 0 && opc <= 8) {
@@ -140,6 +141,11 @@ Option submenu(enum ListType listType){
 }
 
 void listOperations(enum ListType listType){
+    ArrayList array;
+    SimpleList simpleList;
+    DoubleList doubleList;
+
+    
     while(true){
         Option option = submenu(listType);
         
@@ -148,37 +154,34 @@ void listOperations(enum ListType listType){
         }
 
         switch(listType){
-        case ListType::ARRAY_LIST:
-            arrayOperations(option);
-        break;
-        case ListType::SIMPLE_LIST:
-            simpleListOperations(option);
-        break;
-        case ListType::DOUBLE_LIST:
-            doubleListOperations(option);
-        break;
+            case ListType::ARRAY_LIST:
+                arrayOperations(option, array);
+            break;
+            case ListType::SIMPLE_LIST:
+                simpleListOperations(option, simpleList);
+            break;
+            case ListType::DOUBLE_LIST:
+                doubleListOperations(option, doubleList);
+            break;
         }
     }
     return;
 }
 
-void arrayOperations(enum Option option){
-    ArrayList list;
-    
+void arrayOperations(enum Option option, ArrayList& array){ 
     switch(option){
         case Option::GET_LIST: {
             unsigned size;
             size = getUnsigned("Digite o tamanho da lista: ");
 
-            list.getList(size);
+            array.getList(size);
 
             break;
         }
         case Option::GENERATE_RANDOM_LIST: {
             unsigned size;
             int minimumValue, maximumValue;
-            size = getUnsigned("Digite o tamanho da lista");
-            bool valid = false;
+            size = getUnsigned("Digite o tamanho da lista: ");
             do{
                 minimumValue = getInt("Digite o intervalo inferior: "); 
                 maximumValue = getInt("Digite o intervalo superior: "); 
@@ -187,7 +190,7 @@ void arrayOperations(enum Option option){
                 }
             }while(minimumValue > maximumValue);
 
-            list.getRandomList(size, minimumValue, maximumValue);
+            array.getRandomList(size, minimumValue, maximumValue);
 
             break;
         }
@@ -195,8 +198,8 @@ void arrayOperations(enum Option option){
             int value = getInt("Digite o valor a ser inserido: ");
             unsigned index = getUnsigned("Digite o indice a ser inserido: ");
             
-            bool inserted = list.insertAt(value, index);
-            std::cout << inserted ? "Valor inserido.\n" : "Valor nao foi inserido.\n";
+            bool inserted = array.insertAt(value, index);
+            std::cout << (inserted ? "Valor inserido.\n" : "Valor nao foi inserido.\n");
             
            break;
         }
@@ -205,49 +208,52 @@ void arrayOperations(enum Option option){
                 unsigned indexA = getUnsigned("Digite o primeiro indice: "), 
                 indexB = getUnsigned("Digite o segundo indice: ");
                 
-                if(list.swapValue(indexA, indexB)){
+                if(array.swapValue(indexA, indexB)){
                     break;
                 }
                 
                 std::cout << "Indices invalidos.\n";
             }
             std::cout << "Valores Trocados.\n";
+            break;
         }
         case Option::SEARCH: {
             int value = getInt("Digite o valor a ser procurado: ");
             unsigned numberOfAccess = 0;
-            unsigned position = list.search(value, numberOfAccess); 
+            unsigned position = array.search(value, numberOfAccess); 
             if(position == -1){
                 std::cout << "Valor nao encontrado\n";
             } else {
-                std::cout << "Valor encontrado na " << position << "posicao.\n";
+                std::cout << "Valor encontrado na posicao " << position << ".\n";
             }
-            std::cout << "Numero de acessos: " << numberOfAccess;
+            std::cout << "Numero de acessos: " << numberOfAccess << '\n';
+            break;
         }
         case Option::FIND_MIN: {
             unsigned numberOfAccess = 0;
             int minimum; 
-            int position = list.findMinimum(numberOfAccess, minimum);
+            int position = array.findMinimum(numberOfAccess, minimum);
             if(position != -1){
-                std::cout << "Valor encontrado na " << position << "posicao.\n";
+                std::cout << "Valor " << minimum << " encontrado na posicao " << position << ".\n";
             } else {
                 std::cout << "A Lista esta vazia.\n";
             }
             std::cout << "Numero de acessos: " << numberOfAccess;
+            break;
         }
         case Option::PRINT: 
-            list.displayList();
+            array.displayList();
             break;
         case Option::PRINT_REVERSE:
-            list.displayReversedList();
+            array.displayReversedList();
             break;
     }
 }
 
-void simpleListOperations(enum Option option){
+void simpleListOperations(enum Option option, SimpleList& simpleList){
     return;
 }
 
-void doubleListOperations(enum Option option){
+void doubleListOperations(enum Option option, DoubleList& doubleList){
     return;
 }

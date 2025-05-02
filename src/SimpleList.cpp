@@ -69,7 +69,7 @@ bool SimpleList::swapValue(SimpleNode* nodeA, SimpleNode* nodeB)
     return false;
     
     if(nodeA == head || nodeB == head)
-    return;
+    return false;
 
     int temp;
 

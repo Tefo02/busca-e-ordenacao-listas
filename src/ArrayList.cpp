@@ -12,8 +12,9 @@ ArrayList::~ArrayList()
 void ArrayList::getList(size_t size)
 {
     clean();
+    array = new int[capacity];
 
-    for(size_t index = 0; index < size;index++)
+    for(size_t index = 0; index < size; index++)
     {
         int value;
         std::cin >> value;
@@ -23,15 +24,15 @@ void ArrayList::getList(size_t size)
 void ArrayList::getRandomList(int sizeRandom, int minimumValue, int maximumValue)
 {
     clean();
+    array = new int[capacity];
+
     std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> distrib(minimumValue, maximumValue);
 
     for(size_t index = 0; index < sizeRandom;index++)
     {
-        int value;
-        std::cin >> value;
-        insertAt(value, index);
+        insertAt(distrib(gen), index);
     }
 }
 bool ArrayList::insertAt(int value, int position)
@@ -49,6 +50,7 @@ bool ArrayList::insertAt(int value, int position)
 
         delete[] array;
         newArray[position] = value;
+        array = newArray;
         size++;
         return true;     
     }
@@ -82,6 +84,7 @@ int ArrayList::search(int value, unsigned& numberOfAccess)
         }
         numberOfAccess++;
    }
+
    return -1;
 }
 int ArrayList::findMinimum(unsigned& numberOfAccess, int& minimum)
@@ -117,9 +120,9 @@ void ArrayList::displayReversedList()
     if(size == 0)
     return;
 
-    for(int index = size; index >= 0; index--)
+    for(int index = size - 1; index >= 0; index--)
     {
-        std::cout << array[index] << "";
+        std::cout << array[index] << " ";
     }
     std::cout << std::endl;
 }
