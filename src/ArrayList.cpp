@@ -20,14 +20,14 @@ void ArrayList::getList(size_t size)
         insertAt(value, index);
     }
 }
-void ArrayList::getRandomList(int minimumValue, int maximumValue)
+void ArrayList::getRandomList(int sizeRandom, int minimumValue, int maximumValue)
 {
     clean();
     std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> distrib(minimumValue, maximumValue);
 
-    for(size_t index = 0; index < size;index++)
+    for(size_t index = 0; index < sizeRandom;index++)
     {
         int value;
         std::cin >> value;
@@ -82,7 +82,7 @@ int ArrayList::search(int value, unsigned& numberOfAccess)
         }
         numberOfAccess++;
    }
-   return false;
+   return -1;
 }
 int ArrayList::findMinimum(unsigned& numberOfAccess, int& minimum)
 {

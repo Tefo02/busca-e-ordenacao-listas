@@ -13,7 +13,7 @@ public:
     // Métodos Públicos da Classe.
 
     void getList(size_t size);
-    void getRandomList(int minimumValue, int maximumValue);
+    void getRandomList(int sizeRandom, int minimumValue, int maximumValue);
     bool insertAt(int value, int position);
     bool swapValue(int firstPosition, int secondPosition);
     int search(int value, unsigned& numberOfAccess);
