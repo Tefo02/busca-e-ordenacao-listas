@@ -67,6 +67,9 @@ bool SimpleList::swapValue(SimpleNode* nodeA, SimpleNode* nodeB)
 {
     if(nodeA == nullptr || nodeA == nullptr)
     return false;
+    
+    if(nodeA == head || nodeB == head)
+    return;
 
     int temp;
 
@@ -102,13 +105,14 @@ SimpleList:: SimpleNode* SimpleList:: findMinimum(unsigned& numberOfAccess, int&
     SimpleNode* current = head->next;
     numberOfAccess++;
 
-    lowest_value = 99999;
+    lowest_value = INT32_MAX;
 
     while(current != nullptr)
     {
         if(current->data < lowest_value)
         {
             lowest_value = current->data;
+            numberOfAccess++;
         }
         numberOfAccess++;
 
