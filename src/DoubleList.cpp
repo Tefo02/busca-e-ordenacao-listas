@@ -2,8 +2,8 @@
 
 DoubleList::DoubleList() {
     head = new DoubleNode;
-    head->next == nullptr;
-    head->next == nullptr;
+    head->next = nullptr;
+    head->previous = nullptr;
 }
 
 DoubleList::~DoubleList() {
@@ -92,7 +92,7 @@ DoubleList::DoubleNode *DoubleList::search(int value, unsigned &numberOfAccess) 
 }
 
 DoubleList::DoubleNode *DoubleList::findMinimum(unsigned &numberOfAccess, int &minimum) {
-    minimum = INT_MAX;
+    minimum = INT32_MAX;
     DoubleNode* minNode = nullptr;
     
     DoubleNode* current = head->next;
