@@ -116,6 +116,7 @@ void DoubleList::displayList() {
     DoubleNode* current = head->next;
     while(current != nullptr){
         std::cout << current->data << ' ';
+        current = current->next;
     }
     std::cout << std::endl;
 }
@@ -123,6 +124,26 @@ void DoubleList::displayList() {
 void DoubleList::displayReversedList() {
     printfReversedOrder(head->next);
     std::cout << std::endl;
+}
+
+DoubleList::DoubleNode *DoubleList::getNodeByIndex(unsigned index) {
+    DoubleNode *current = head->next;
+    unsigned currentIndex = 0;
+    while(current != nullptr && currentIndex != index){
+        current = current->next;
+        currentIndex++;
+    }
+    return current;
+}
+
+unsigned DoubleList::getIndexOfNode(DoubleNode *node) {
+    DoubleNode *current = head->next;
+    unsigned currentIndex = 0;
+    while(current != nullptr && current != node){
+        current = current->next;
+        currentIndex++;
+    }
+    return currentIndex;
 }
 
 void DoubleList::printfReversedOrder(DoubleNode* node) {

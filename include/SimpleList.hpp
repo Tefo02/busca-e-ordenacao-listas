@@ -25,6 +25,8 @@ class SimpleList {
     SimpleNode* findMinimum(unsigned& numberOfAccess, int& lowest_value);
     void displayList();
     void displayReversedList();
+    SimpleNode* getNodeByIndex(unsigned index);
+    unsigned getIndexOfNode(SimpleNode* node);
 
     // Métodos Públicos da Classe.
 

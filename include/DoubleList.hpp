@@ -26,6 +26,8 @@ class DoubleList {
     DoubleNode* findMinimum(unsigned& numberOfAccess, int& minimum);
     void displayList();
     void displayReversedList();
+    DoubleNode* getNodeByIndex(unsigned index);
+    unsigned getIndexOfNode(DoubleNode* node);
 
 private:
     // Define o Nó Cabeça.

@@ -42,9 +42,11 @@ int main(){
             break;
         }
         listOperations(listType);
+        std::cout << "\nRetornando ao menu principal...\n";
+
     }
     
-    std::cout << "fim do programa.\n";
+    std::cout << "Fim do Programa.\n";
     return 0;
 }
 
@@ -98,24 +100,6 @@ ListType menu() {
 }
 
 Option submenu(enum ListType listType){
-    /*
-    std::string title;
-    switch(listType){
-    case ListType::ARRAY_LIST:
-        title = "Lista Contigua";
-    break;
-    case ListType::SIMPLE_LIST:
-        title = "Lista Ligada Simples";
-    break;
-    case ListType::DOUBLE_LIST:
-        title = "Lista Duplamente Ligada";
-    break;
-    default:
-        std::cerr << "Erro: Tipo de lista invalido.\n";
-        return;
-    }
-    */
-
     int opc;
     while (true) {
         std::cout << "\n\t+--------------+ Submenu +--------------+\n";
@@ -144,7 +128,6 @@ void listOperations(enum ListType listType){
     ArrayList array;
     SimpleList simpleList;
     DoubleList doubleList;
-
     
     while(true){
         Option option = submenu(listType);
@@ -221,7 +204,7 @@ void arrayOperations(enum Option option, ArrayList& array){
             int value = getInt("Digite o valor a ser procurado: ");
             unsigned numberOfAccess = 0;
             unsigned position = array.search(value, numberOfAccess); 
-            if(position == -1){
+            if(position == std::numeric_limits<unsigned>::max()){
                 std::cout << "Valor nao encontrado\n";
             } else {
                 std::cout << "Valor encontrado na posicao " << position << ".\n";
@@ -251,9 +234,187 @@ void arrayOperations(enum Option option, ArrayList& array){
 }
 
 void simpleListOperations(enum Option option, SimpleList& simpleList){
-    return;
+    switch(option){
+        case Option::GET_LIST: {
+            unsigned size;
+            size = getUnsigned("Digite o tamanho da lista: ");
+
+            simpleList.getList(size);
+
+            break;
+        }
+        case Option::GENERATE_RANDOM_LIST: {
+            unsigned size;
+            int minimumValue, maximumValue;
+            size = getUnsigned("Digite o tamanho da lista: ");
+            do{
+                minimumValue = getInt("Digite o intervalo inferior: "); 
+                maximumValue = getInt("Digite o intervalo superior: "); 
+                if(minimumValue > maximumValue){
+                    std::cout << "O intervalo inferior deve ser maior do que o superior.\nDigite novamente.\n";
+                }
+            }while(minimumValue > maximumValue);
+
+            simpleList.getRandomList(size, minimumValue, maximumValue);
+
+            break;
+        }
+        case Option::INSERT_AT: {
+            int value = getInt("Digite o valor a ser inserido: ");
+            SimpleList::SimpleNode *pointer = nullptr;
+            while(true) {
+                unsigned index = getUnsigned("Digite o indice a ser inserido: ");
+                if(index == 0) {
+                    pointer = nullptr;
+                } else {
+                    pointer = simpleList.getNodeByIndex(index);
+                    if(pointer != nullptr) {
+                        break;
+                    }
+                }
+                std::cout << "Erro: Indice invalido. Digite novamente." << std::endl;
+            }
+            
+            simpleList.insertAt(value, pointer);
+            std::cout << "Valor inserido.\n";
+           break;
+        }
+        case Option::SWAP_VALUE: {
+            while(true){
+                unsigned indexA = getUnsigned("Digite o primeiro indice: "), 
+                indexB = getUnsigned("Digite o segundo indice: ");
+                SimpleList::SimpleNode *pointerA = simpleList.getNodeByIndex(indexA);
+                SimpleList::SimpleNode *pointerB = simpleList.getNodeByIndex(indexB);
+
+                if(simpleList.swapValue(pointerA, pointerB)){
+                    break;
+                }
+                
+                std::cout << "Indices invalidos.\n";
+            }
+            std::cout << "Valores Trocados.\n";
+            break;
+        }
+        case Option::SEARCH: {
+            int value = getInt("Digite o valor a ser procurado: ");
+            unsigned numberOfAccess = 0;
+            SimpleList::SimpleNode *pointer = simpleList.search(value, numberOfAccess); 
+            if(pointer == nullptr) {
+                std::cout << "Valor nao encontrado\n";
+            } else {
+                std::cout << "Valor encontrado na posicao " << simpleList.getIndexOfNode(pointer) << ".\n";
+            }
+            std::cout << "Numero de acessos: " << numberOfAccess << '\n';
+            break;
+        }
+        case Option::FIND_MIN: {
+            unsigned numberOfAccess = 0;
+            int minimum; 
+            SimpleList::SimpleNode *pointer = simpleList.findMinimum(numberOfAccess, minimum);
+            if(pointer != nullptr){
+                std::cout << "Valor " << minimum << " encontrado na posicao " << simpleList.getIndexOfNode(pointer) << ".\n";
+            } else {
+                std::cout << "A Lista esta vazia.\n";
+            }
+            std::cout << "Numero de acessos: " << numberOfAccess;
+            break;
+        }
+        case Option::PRINT: 
+            simpleList.displayList();
+            break;
+        case Option::PRINT_REVERSE:
+            simpleList.displayReversedList();
+            break;
+    }
 }
 
 void doubleListOperations(enum Option option, DoubleList& doubleList){
-    return;
+    switch(option){
+        case Option::GET_LIST: {
+            unsigned size;
+            size = getUnsigned("Digite o tamanho da lista: ");
+
+            doubleList.getList(size);
+
+            break;
+        }
+        case Option::GENERATE_RANDOM_LIST: {
+            unsigned size;
+            int minimumValue, maximumValue;
+            size = getUnsigned("Digite o tamanho da lista: ");
+            do{
+                minimumValue = getInt("Digite o intervalo inferior: "); 
+                maximumValue = getInt("Digite o intervalo superior: "); 
+                if(minimumValue > maximumValue){
+                    std::cout << "O intervalo inferior deve ser maior do que o superior.\nDigite novamente.\n";
+                }
+            }while(minimumValue > maximumValue);
+
+            doubleList.getRandomList(size, minimumValue, maximumValue);
+
+            break;
+        }
+        case Option::INSERT_AT: {
+            int value = getInt("Digite o valor a ser inserido: ");
+            DoubleList::DoubleNode *pointer = nullptr;
+            while(true) {
+                unsigned index = getUnsigned("Digite o indice a ser inserido: ");
+                pointer = doubleList.getNodeByIndex(index);
+                if(pointer != nullptr) {
+                    break;
+                }
+                std::cout << "Erro: Indice invalido. Digite novamente." << std::endl;
+            }
+            
+            doubleList.insertAt(value, pointer->previous);
+            std::cout << "Valor inserido.\n";
+           break;
+        }
+        case Option::SWAP_VALUE: {
+            while(true){
+                unsigned indexA = getUnsigned("Digite o primeiro indice: "), 
+                indexB = getUnsigned("Digite o segundo indice: ");
+                DoubleList::DoubleNode *pointerA = doubleList.getNodeByIndex(indexA);
+                DoubleList::DoubleNode *pointerB = doubleList.getNodeByIndex(indexB);
+
+                if(doubleList.swapValue(pointerA, pointerB)){
+                    break;
+                }
+                
+                std::cout << "Indices invalidos.\n";
+            }
+            std::cout << "Valores Trocados.\n";
+            break;
+        }
+        case Option::SEARCH: {
+            int value = getInt("Digite o valor a ser procurado: ");
+            unsigned numberOfAccess = 0;
+            DoubleList::DoubleNode *pointer = doubleList.search(value, numberOfAccess); 
+            if(pointer == nullptr) {
+                std::cout << "Valor nao encontrado\n";
+            } else {
+                std::cout << "Valor encontrado na posicao " << doubleList.getIndexOfNode(pointer) << ".\n";
+            }
+            std::cout << "Numero de acessos: " << numberOfAccess << '\n';
+            break;
+        }
+        case Option::FIND_MIN: {
+            unsigned numberOfAccess = 0;
+            int minimum; 
+            DoubleList::DoubleNode *pointer = doubleList.findMinimum(numberOfAccess, minimum);
+            if(pointer != nullptr){
+                std::cout << "Valor " << minimum << " encontrado na posicao " << doubleList.getIndexOfNode(pointer) << ".\n";
+            } else {
+                std::cout << "A Lista esta vazia.\n";
+            }
+            std::cout << "Numero de acessos: " << numberOfAccess;
+            break;
+        }
+        case Option::PRINT: 
+            doubleList.displayList();
+            break;
+        case Option::PRINT_REVERSE:
+            doubleList.displayReversedList();
+            break;
+    }
 }

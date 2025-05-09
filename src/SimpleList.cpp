@@ -22,6 +22,7 @@ SimpleList::SimpleNode* SimpleList::newNode(int value)
 void SimpleList::getList(size_t size)
 {
     clean();
+
     SimpleNode *current = head->next;
     for(size_t index = 0; index < size; index++)
     {
@@ -152,17 +153,31 @@ void SimpleList::printfReverseOrder(SimpleNode* node)
     printfReverseOrder(node->next);
     std::cout << node->data << " ";
 } 
-void SimpleList:: clean()
-{
-    SimpleNode *previous = head->next;
-    SimpleNode *current = head->next->next;
-
-    while(current != nullptr)
-    {
-        delete previous;
-        previous = current;
+void SimpleList::clean() {
+    SimpleNode* current = head->next;
+    while(current != nullptr){
+        SimpleNode* temp = current;
         current = current->next;
+        delete temp;
     }
-    
-    delete previous;
+}
+
+SimpleList::SimpleNode *SimpleList::getNodeByIndex(unsigned index) {
+    SimpleNode *current = head->next;
+    unsigned currentIndex = 0;
+    while(current != nullptr && currentIndex != index){
+        current = current->next;
+        currentIndex++;
+    }
+    return current;
+}
+
+unsigned SimpleList::getIndexOfNode(SimpleNode *node) {
+    SimpleNode *current = head->next;
+    unsigned currentIndex = 0;
+    while(current != nullptr && current != node){
+        current = current->next;
+        currentIndex++;
+    }
+    return currentIndex;
 }
