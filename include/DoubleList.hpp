@@ -24,16 +24,16 @@ class DoubleList {
     bool swapValue(DoubleNode* nodeA, DoubleNode* nodeB);
     DoubleNode* search(int value, unsigned& numberOfAccess);
     DoubleNode* findMinimum(unsigned& numberOfAccess, int& minimum);
-    void displayList();
-    void displayReversedList();
-    DoubleNode* getNodeByIndex(unsigned index);
-    unsigned getIndexOfNode(DoubleNode* node);
+    void displayList()const;
+    void displayReversedList()const;
+    DoubleNode* getNodeByIndex(unsigned index)const;
+    unsigned getIndexOfNode(DoubleNode* node)const;
 
 private:
     // Define o Nó Cabeça.
     DoubleNode* head;
     // Métodos Privados da Classe.
     
-    void printfReversedOrder(DoubleNode* node);
+    void printfReversedOrder(DoubleNode* node) const ;
     void clean();
 };

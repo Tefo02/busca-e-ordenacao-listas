@@ -8,6 +8,7 @@ ArrayList::ArrayList()
 ArrayList::~ArrayList()
 {
     clean();
+    std::cout << "Deletando";
 }
 void ArrayList::getList(size_t size)
 {
@@ -87,7 +88,7 @@ int ArrayList::search(int value, unsigned& numberOfAccess)
 
    return -1;
 }
-int ArrayList::findMinimum(unsigned& numberOfAccess, int& minimum)
+int ArrayList::findMinimum(unsigned& numberOfAccess, int& minimum) 
 {
     minimum = INT32_MAX;
     int minimumIndex = -1;
@@ -104,7 +105,7 @@ int ArrayList::findMinimum(unsigned& numberOfAccess, int& minimum)
 
     return minimumIndex;
 }
-void ArrayList::displayList()
+void ArrayList::displayList()const
 {
     if(size == 0)
     return;
@@ -115,7 +116,7 @@ void ArrayList::displayList()
     }
     std::cout << std:: endl;
 }
-void ArrayList::displayReversedList()
+void ArrayList::displayReversedList() const
 {
     if(size == 0)
     return;

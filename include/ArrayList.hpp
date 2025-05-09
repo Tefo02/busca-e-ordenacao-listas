@@ -18,8 +18,8 @@ public:
     bool swapValue(int firstPosition, int secondPosition);
     int search(int value, unsigned& numberOfAccess);
     int findMinimum(unsigned& numberOfAccess, int& minimum);
-    void displayList();
-    void displayReversedList();
+    void displayList()const;
+    void displayReversedList()const;
 
 private:
     // Definição da estrutura.

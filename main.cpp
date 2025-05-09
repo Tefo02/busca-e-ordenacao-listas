@@ -24,14 +24,14 @@ enum class Option {
 };
 
 enum ListType menu();
-enum Option submenu(enum ListType listType);
-void listOperations(enum ListType listType);
-void arrayOperations(enum Option option, ArrayList& array);
-void simpleListOperations(enum Option option, SimpleList& simpleList);
-void doubleListOperations(enum Option option, DoubleList& doubleList);
+enum Option submenu(const ListType& listType);
+void listOperations(const ListType& listType);
+void arrayOperations(const Option& option, ArrayList& array);
+void simpleListOperations(const Option& option, SimpleList& simpleList);
+void doubleListOperations(const Option& option, DoubleList& doubleList);
 
-int getInt(std::string message);
-unsigned getUnsigned(std::string message);
+int getInt(const std::string& message);
+unsigned getUnsigned(const std::string& message);
 
 
 int main(){
@@ -50,7 +50,7 @@ int main(){
     return 0;
 }
 
-int getInt(std::string message){
+int getInt(const std::string& message){
     int newInt;
     while(true){
         std::cout << message;
@@ -64,7 +64,7 @@ int getInt(std::string message){
     return newInt;
 }
 
-unsigned getUnsigned(std::string message){
+unsigned getUnsigned(const std::string& message){
     unsigned newUnsigned;
     while(true){
         std::cout << message;
@@ -99,7 +99,7 @@ ListType menu() {
     }
 }
 
-Option submenu(enum ListType listType){
+Option submenu(const ListType& listType){
     int opc;
     while (true) {
         std::cout << "\n\t+--------------+ Submenu +--------------+\n";
@@ -124,7 +124,7 @@ Option submenu(enum ListType listType){
     }
 }
 
-void listOperations(enum ListType listType){
+void listOperations(const ListType& listType){
     ArrayList array;
     SimpleList simpleList;
     DoubleList doubleList;
@@ -151,7 +151,7 @@ void listOperations(enum ListType listType){
     return;
 }
 
-void arrayOperations(enum Option option, ArrayList& array){ 
+void arrayOperations(const Option& option, ArrayList& array){ 
     switch(option){
         case Option::GET_LIST: {
             unsigned size;
@@ -225,15 +225,15 @@ void arrayOperations(enum Option option, ArrayList& array){
             break;
         }
         case Option::PRINT: 
-            array.displayList();
+            array.displayList(); 
             break;
-        case Option::PRINT_REVERSE:
+        case Option::PRINT_REVERSE:                             
             array.displayReversedList();
             break;
     }
 }
 
-void simpleListOperations(enum Option option, SimpleList& simpleList){
+void simpleListOperations(const Option& option, SimpleList& simpleList){
     switch(option){
         case Option::GET_LIST: {
             unsigned size;
@@ -328,7 +328,7 @@ void simpleListOperations(enum Option option, SimpleList& simpleList){
     }
 }
 
-void doubleListOperations(enum Option option, DoubleList& doubleList){
+void doubleListOperations(const Option& option, DoubleList& doubleList){
     switch(option){
         case Option::GET_LIST: {
             unsigned size;

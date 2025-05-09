@@ -9,6 +9,7 @@ DoubleList::DoubleList() {
 DoubleList::~DoubleList() {
     clean();
     delete head;
+    std::cout << "Deletando";
 }
 
 void DoubleList::getList(size_t size) {
@@ -73,7 +74,7 @@ bool DoubleList::swapValue(DoubleNode *nodeA, DoubleNode *nodeB) {
     return true;
 }
 
-DoubleList::DoubleNode *DoubleList::search(int value, unsigned &numberOfAccess) { 
+DoubleList::DoubleNode *DoubleList::search(int value, unsigned &numberOfAccess){ 
     DoubleNode* current = head->next;
     numberOfAccess = 1;
     
@@ -91,7 +92,7 @@ DoubleList::DoubleNode *DoubleList::search(int value, unsigned &numberOfAccess) 
     return nullptr;
 }
 
-DoubleList::DoubleNode *DoubleList::findMinimum(unsigned &numberOfAccess, int &minimum) {
+DoubleList::DoubleNode *DoubleList::findMinimum(unsigned &numberOfAccess, int &minimum){
     minimum = INT32_MAX;
     DoubleNode* minNode = nullptr;
     
@@ -112,7 +113,7 @@ DoubleList::DoubleNode *DoubleList::findMinimum(unsigned &numberOfAccess, int &m
     return minNode;
 }
 
-void DoubleList::displayList() {
+void DoubleList::displayList() const {
     DoubleNode* current = head->next;
     while(current != nullptr){
         std::cout << current->data << ' ';
@@ -121,12 +122,12 @@ void DoubleList::displayList() {
     std::cout << std::endl;
 }
 
-void DoubleList::displayReversedList() {
+void DoubleList::displayReversedList() const {
     printfReversedOrder(head->next);
     std::cout << std::endl;
 }
 
-DoubleList::DoubleNode *DoubleList::getNodeByIndex(unsigned index) {
+DoubleList::DoubleNode *DoubleList::getNodeByIndex(unsigned index) const {
     DoubleNode *current = head->next;
     unsigned currentIndex = 0;
     while(current != nullptr && currentIndex != index){
@@ -136,7 +137,7 @@ DoubleList::DoubleNode *DoubleList::getNodeByIndex(unsigned index) {
     return current;
 }
 
-unsigned DoubleList::getIndexOfNode(DoubleNode *node) {
+unsigned DoubleList::getIndexOfNode(DoubleNode *node) const {
     DoubleNode *current = head->next;
     unsigned currentIndex = 0;
     while(current != nullptr && current != node){
@@ -146,7 +147,7 @@ unsigned DoubleList::getIndexOfNode(DoubleNode *node) {
     return currentIndex;
 }
 
-void DoubleList::printfReversedOrder(DoubleNode* node) {
+void DoubleList::printfReversedOrder(DoubleNode* node) const {
     if(node == nullptr){
         return;
     }

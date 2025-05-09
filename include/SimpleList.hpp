@@ -21,10 +21,10 @@ class SimpleList {
     void getRandomList(size_t size, int minimumValue, int maximumValue);
     void insertAt(int value, SimpleNode* previous);
     bool swapValue(SimpleNode* nodeA, SimpleNode* nodeB);
-    SimpleNode* search(int value, unsigned& numberOfAccess);
+    SimpleNode* search(int value, unsigned& numberOfAccess)const;
     SimpleNode* findMinimum(unsigned& numberOfAccess, int& lowest_value);
-    void displayList();
-    void displayReversedList();
+    void displayList()const;
+    void displayReversedList()const;
     SimpleNode* getNodeByIndex(unsigned index);
     unsigned getIndexOfNode(SimpleNode* node);
 
@@ -37,6 +37,6 @@ private:
 
     // Métodos Privados da Classe.
     SimpleNode* newNode(int value);
-    void printfReverseOrder(SimpleNode* node);
+    void printfReverseOrder(SimpleNode* node) const;
     void clean();
 };

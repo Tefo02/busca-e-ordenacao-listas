@@ -2,7 +2,7 @@
 
 SimpleList::SimpleList()
 {
-    SimpleNode *head = new SimpleNode;
+    head = new SimpleNode;
     head->next = nullptr;
 }
 
@@ -10,6 +10,7 @@ SimpleList::~SimpleList()
 {
     clean();
     delete head;
+    std::cout << "Deletando";
 }
 
 SimpleList::SimpleNode* SimpleList::newNode(int value)
@@ -23,7 +24,9 @@ void SimpleList::getList(size_t size)
 {
     clean();
 
-    SimpleNode *current = head->next;
+    SimpleNode *current = head;
+
+    
     for(size_t index = 0; index < size; index++)
     {
         int value;
@@ -32,6 +35,7 @@ void SimpleList::getList(size_t size)
         current = current->next;
     }
 }
+
 void SimpleList::getRandomList(size_t size, int minimumValue, int maximumValue)
 {   
     clean();
@@ -80,7 +84,7 @@ bool SimpleList::swapValue(SimpleNode* nodeA, SimpleNode* nodeB)
     
     return true;
 }
-SimpleList:: SimpleNode* SimpleList::search(int value, unsigned& numberOfAccess)
+SimpleList:: SimpleNode* SimpleList::search(int value, unsigned& numberOfAccess) const
 {
     SimpleNode* current = head->next;
     numberOfAccess++;
@@ -123,7 +127,7 @@ SimpleList:: SimpleNode* SimpleList:: findMinimum(unsigned& numberOfAccess, int&
     
     return current;
 }
-void SimpleList:: displayList()
+void SimpleList:: displayList() const
 {
     if(head->next == nullptr)
     {
@@ -139,13 +143,13 @@ void SimpleList:: displayList()
     }
     std::cout << std::endl;
 }
-void SimpleList::displayReversedList()
+void SimpleList::displayReversedList() const
 {
     SimpleNode* node = head->next;
     printfReverseOrder(node);
     std::cout << std::endl;
 }
-void SimpleList::printfReverseOrder(SimpleNode* node)
+void SimpleList::printfReverseOrder(SimpleNode* node) const
 {
     if(node == nullptr)
     return;
