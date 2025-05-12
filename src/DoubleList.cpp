@@ -9,7 +9,6 @@ DoubleList::DoubleList() {
 DoubleList::~DoubleList() {
     clean();
     delete head;
-    std::cout << "Deletando";
 }
 
 void DoubleList::getList(size_t size) {

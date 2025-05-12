@@ -10,7 +10,6 @@ SimpleList::~SimpleList()
 {
     clean();
     delete head;
-    std::cout << "Deletando";
 }
 
 SimpleList::SimpleNode* SimpleList::newNode(int value)
@@ -107,6 +106,7 @@ SimpleList:: SimpleNode* SimpleList::search(int value, unsigned& numberOfAccess)
 }
 SimpleList:: SimpleNode* SimpleList:: findMinimum(unsigned& numberOfAccess, int& lowest_value)
 {
+    SimpleNode* minNode = nullptr;
     SimpleNode* current = head->next;
     numberOfAccess++;
 
@@ -117,6 +117,7 @@ SimpleList:: SimpleNode* SimpleList:: findMinimum(unsigned& numberOfAccess, int&
         if(current->data < lowest_value)
         {
             lowest_value = current->data;
+            minNode = current;
             numberOfAccess++;
         }
         numberOfAccess++;
@@ -125,7 +126,7 @@ SimpleList:: SimpleNode* SimpleList:: findMinimum(unsigned& numberOfAccess, int&
         numberOfAccess++;
     }
     
-    return current;
+    return minNode;
 }
 void SimpleList:: displayList() const
 {

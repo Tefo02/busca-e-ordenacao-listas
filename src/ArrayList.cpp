@@ -8,7 +8,6 @@ ArrayList::ArrayList()
 ArrayList::~ArrayList()
 {
     clean();
-    std::cout << "Deletando";
 }
 void ArrayList::getList(size_t size)
 {
