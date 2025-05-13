@@ -129,4 +129,6 @@ void ArrayList::displayReversedList() const
 void ArrayList::clean()
 {
     delete[] array;
+    size = 0;
+    capacity = 8;
 }

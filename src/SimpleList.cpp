@@ -51,14 +51,19 @@ void SimpleList::getRandomList(size_t size, int minimumValue, int maximumValue)
 }
 void SimpleList::insertAt(int value, SimpleNode* previous)
 {
-    if(previous == nullptr)
+    if(previous == nullptr && head->next != nullptr){
+        head->next->data = value;
+        return;
+    }
+    
+    if(previous == nullptr && head->next == nullptr)
     {
         SimpleNode *node = newNode(value);
+        node->next = head->next;
         head->next = node;
         return;
-
     }
-    if(previous->next == NULL)
+    if(previous->next == nullptr)
     {
         SimpleNode *node = newNode(value);
         previous->next = node;
@@ -160,11 +165,12 @@ void SimpleList::printfReverseOrder(SimpleNode* node) const
 } 
 void SimpleList::clean() {
     SimpleNode* current = head->next;
-    while(current != nullptr){
+    while(current != nullptr) {
         SimpleNode* temp = current;
         current = current->next;
         delete temp;
     }
+    head->next = nullptr;
 }
 
 SimpleList::SimpleNode *SimpleList::getNodeByIndex(unsigned index) {

@@ -162,4 +162,6 @@ void DoubleList::clean() {
         current = current->next;
         delete temp;
     }
+    
+    head->next = nullptr;
 }
