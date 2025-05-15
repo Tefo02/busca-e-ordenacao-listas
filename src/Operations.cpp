@@ -131,16 +131,28 @@ void simpleListOperations(const Option& option, SimpleList& simpleList){
         }
         case Option::SWAP_VALUE: {
             while(true){
-                unsigned indexA = getUnsigned("Digite o primeiro indice: "), 
+                unsigned indexA, indexB;
+
+                SimpleList::SimpleNode *pointerA;
+                indexA = getUnsigned("Digite o primeiro indice: ");
+                pointerA = simpleList.getNodeByIndex(indexA);
+
+
+                SimpleList::SimpleNode *pointerB;
                 indexB = getUnsigned("Digite o segundo indice: ");
-                SimpleList::SimpleNode *pointerA = simpleList.getNodeByIndex(indexA);
-                SimpleList::SimpleNode *pointerB = simpleList.getNodeByIndex(indexB);
+                pointerB = simpleList.getNodeByIndex(indexB);
 
                 if(simpleList.swapValue(pointerA, pointerB)){
                     break;
                 }
                 
                 std::cout << "Indices invalidos.\n";
+                char opc;
+                std::cout << "Deseja digitar novamente? (Y/N): ";
+                std::cin >> opc;
+                if(opc >= 'a' && opc <= 'z') opc -= 32;
+                if(opc == 'Y') continue;
+                else return;
             }
             std::cout << "Valores Trocados.\n";
             break;
@@ -228,16 +240,28 @@ void doubleListOperations(const Option& option, DoubleList& doubleList){
         }
         case Option::SWAP_VALUE: {
             while(true){
-                unsigned indexA = getUnsigned("Digite o primeiro indice: "), 
+                unsigned indexA, indexB;
+                DoubleList::DoubleNode *pointerA;
+
+                indexA = getUnsigned("Digite o primeiro indice: ");
+                pointerA = doubleList.getNodeByIndex(indexA);
+
+                DoubleList::DoubleNode *pointerB;
                 indexB = getUnsigned("Digite o segundo indice: ");
-                DoubleList::DoubleNode *pointerA = doubleList.getNodeByIndex(indexA);
-                DoubleList::DoubleNode *pointerB = doubleList.getNodeByIndex(indexB);
+                pointerB = doubleList.getNodeByIndex(indexB);
 
                 if(doubleList.swapValue(pointerA, pointerB)){
                     break;
                 }
                 
+                
                 std::cout << "Indices invalidos.\n";
+                char opc;
+                std::cout << "Deseja digitar novamente? (Y/N): ";
+                std::cin >> opc;
+                if(opc >= 'a' && opc <= 'z') opc -= 32;
+                if(opc == 'Y') continue;
+                else return;
             }
             std::cout << "Valores Trocados.\n";
             break;
