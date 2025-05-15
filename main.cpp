@@ -1,5 +1,7 @@
 #include "include/Operations.hpp"
 
+
+//Membros da equipe: Robert Afonso Aquino e Stefano Lopes Delgado
 int main(){
 
     while(true){

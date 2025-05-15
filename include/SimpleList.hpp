@@ -21,7 +21,7 @@ class SimpleList {
     void getRandomList(size_t size, int minimumValue, int maximumValue);
     void insertAt(int value, SimpleNode* previous);
     bool swapValue(SimpleNode* nodeA, SimpleNode* nodeB);
-    SimpleNode* search(int value, unsigned& numberOfAccess)const;
+    SimpleNode* search(int value, unsigned& numberOfAccess);
     SimpleNode* findMinimum(unsigned& numberOfAccess, int& lowest_value);
     void displayList()const;
     void displayReversedList()const;

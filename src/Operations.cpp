@@ -209,14 +209,20 @@ void doubleListOperations(const Option& option, DoubleList& doubleList){
             DoubleList::DoubleNode *pointer = nullptr;
             while(true) {
                 unsigned index = getUnsigned("Digite o indice a ser inserido: ");
-                pointer = doubleList.getNodeByIndex(index);
+                if(index == 0){
+                    break;
+                }
+                pointer = doubleList.getNodeByIndex(index - 1);
                 if(pointer != nullptr) {
                     break;
                 }
                 std::cout << "Erro: Indice invalido. Digite novamente." << std::endl;
             }
-            
-            doubleList.insertAt(value, pointer->previous); 
+            if(pointer != nullptr){
+                doubleList.insertAt(value, pointer);  
+            } else {
+                doubleList.insertAt(value, pointer);
+            }
             std::cout << "Valor inserido.\n";
            break;
         }

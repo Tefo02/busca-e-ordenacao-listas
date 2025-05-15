@@ -51,11 +51,13 @@ void SimpleList::getRandomList(size_t size, int minimumValue, int maximumValue)
 }
 void SimpleList::insertAt(int value, SimpleNode* previous)
 {
+    //Caso 1: Insere no primero nó da lista
     if(previous == nullptr && head->next != nullptr){
         head->next->data = value;
         return;
     }
     
+    //Caso 2: Criar e insere no primeiro nó
     if(previous == nullptr && head->next == nullptr)
     {
         SimpleNode *node = newNode(value);
@@ -63,6 +65,8 @@ void SimpleList::insertAt(int value, SimpleNode* previous)
         head->next = node;
         return;
     }
+
+    //Caso 3: O campo proximo do nodo aponta para NULL
     if(previous->next == nullptr)
     {
         SimpleNode *node = newNode(value);
@@ -70,6 +74,7 @@ void SimpleList::insertAt(int value, SimpleNode* previous)
         return;
     }
 
+    //Caso genérico: Insere em um posição existente
     previous->next->data = value;
 }
 bool SimpleList::swapValue(SimpleNode* nodeA, SimpleNode* nodeB)
@@ -88,7 +93,7 @@ bool SimpleList::swapValue(SimpleNode* nodeA, SimpleNode* nodeB)
     
     return true;
 }
-SimpleList:: SimpleNode* SimpleList::search(int value, unsigned& numberOfAccess) const
+SimpleList:: SimpleNode* SimpleList::search(int value, unsigned& numberOfAccess)
 {
     SimpleNode* current = head->next;
     numberOfAccess++;

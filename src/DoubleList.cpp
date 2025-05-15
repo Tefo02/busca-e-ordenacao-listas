@@ -39,7 +39,12 @@ void DoubleList::getRandomList(size_t size, int minimumValue, int maximumValue) 
 
 
 void DoubleList::insertAt(int value, DoubleNode *previous) {
-    if(previous == nullptr){
+    if(previous == nullptr && head->next != nullptr){
+        head->next->data = value;
+        return;
+    }
+
+    if(previous == nullptr && head->next == nullptr){
         DoubleNode* newNode = new DoubleNode;
         newNode->data = value;
         newNode->previous = head;
